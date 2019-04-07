@@ -1,4 +1,4 @@
-package ucare.transasia.com.ucare;
+package ucare.transasia.com.ucare_device_plugin;
 
 import android.util.Log;
 
