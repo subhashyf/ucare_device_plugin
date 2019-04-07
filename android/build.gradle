@@ -1,0 +1,59 @@
+group 'ucare.transasia.com.ucare_device_plugin'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 21
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+
+    implementation(name: 'garmin-health-sdk', ext: 'aar') {
+        exclude group: 'com.google.protobuf'
+    }
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+    implementation 'com.google.guava:guava:20.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    implementation 'net.danlew:android.joda:2.9.9.2'
+}
