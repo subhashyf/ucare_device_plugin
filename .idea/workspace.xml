@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17e2c78d-5997-4a70-97be-9fa58ef72f3f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ucare_device_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ucare_device_plugin.dart" afterDir="false" />
-    </list>
+    <list default="true" id="17e2c78d-5997-4a70-97be-9fa58ef72f3f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +12,7 @@
     <session id="768582907">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.opened" value="3" />
@@ -51,11 +48,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+            <state relative-caret-position="135">
+              <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -74,10 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
+            <state relative-caret-position="110">
               <caret line="163" column="37" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -116,8 +113,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="234" />
-    <option name="y" value="93" />
+    <option name="x" value="61" />
+    <option name="y" value="23" />
     <option name="width" value="1268" />
     <option name="height" value="708" />
   </component>
@@ -253,7 +250,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="53" y="23" width="1268" height="708" extended-state="0" />
+    <frame x="61" y="23" width="1268" height="708" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
@@ -299,22 +296,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
+    <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="163" column="37" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="37" />
+        <state relative-caret-position="135">
+          <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="110">
+          <caret line="163" column="37" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="37" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
