@@ -34,6 +34,7 @@ import android.bluetooth.le.ScanSettings;
 
 import com.garmin.health.GarminHealth;
 import com.garmin.health.GarminHealthInitializationException;
+import com.garmin.health.GarminDeviceScanCallback;
 
 
 
@@ -136,6 +137,19 @@ public class UcareDevicePlugin implements MethodCallHandler {
     return locationManager != null && (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
   }
 
+  private void scan() {
+    BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothLeScanner scanner = btAdapter.getBluetoothScanner();
 
+    scanner.startScan(new GarminDeviceScanCallback() {
+      public void onScannedDevice(int callbackType, ScannedDevice device) {
+        mDeviceAdapter.addDevice(device);
+      }
+
+      public void onScanFailed(int errorCode) {
+        showErrorDialog("Scanning failed");
+      }
+    }
+  }
 
 }
