@@ -155,7 +155,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
     Log.i("getPairedDevices", "Inside getPairedDevices");
     deviceManager = DeviceManager.getDeviceManager();
     List<Device> devices = new ArrayList<>(deviceManager.getPairedDevices());
-    Log.i("getPairedDevices", "Inside getPairedDevices",devices);
+    Log.i("getPairedDevices", "Inside after getPairedDevices");
 
     return devices;
   }
