@@ -10,4 +10,9 @@ class UcareDevicePlugin {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static Future<dynamic> get getPairedDevices async {
+    final List<dynamic> pairedDevices = await _channel.invokeMethod('getPairedDevices');
+    return pairedDevices;
+  }
 }

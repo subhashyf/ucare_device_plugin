@@ -55,10 +55,10 @@ public class UcareDevicePlugin implements MethodCallHandler {
   private Activity activity;
   private static final int REQUEST_COARSE_LOCATION = 1;
 
-  private BluetoothLeScanner bluetoothScanner;
-  private DeviceManager mDeviceManager;
-  private List<ScannedDevice> mDevices;
-  private final static int REQUEST_ENABLE_BT = 1;
+  private PairedDeviceListAdapter mListAdapter;
+  private DeviceManager deviceManager;
+  private SyncProgressListener mDeviceSyncListener;
+  private LoggingSyncProgressListener mLoggingDeviceSyncListener;
 
   private static final String LICENSE = "CgwCAwQFBgcICQoLDA4SgAIeCHUUoWcrOFjnJsFw14DCGjuUKcMXnpcyILioLWo1vxwYrwiwx+oSMJXM/bei8gWR8ND25zRHh8HYBPy3390fDsFcluiC1dVcR0LEuFGgxiuS6fK2R7+RmpUNxFZ72vyMS0PMH23IyVQOWoyAwIgdXd0npYwwGeCWMONYeZUMBbbh2HgPNqds1ZyaL7S1EQOubka00TnUVopSyVbwOeQTikRTPUwG1LlD7jJ0oPER7Mf1+v3fhaOaCS0Sl2UetQAuGscoRxqw8n6fJbD1SKi6nMcoLxYTu+q3SCXJ+Pf7F2Zq/4I97IaEa4Np5gzkTFjluUSqreegeuq6xONES1q1GIDwitWxLSoDAQID";
   private boolean mPreferSystemBonding =  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
@@ -110,7 +110,12 @@ public class UcareDevicePlugin implements MethodCallHandler {
       }
 
 
-    } else {
+    }
+    else if(call.method.equals("getPairedDevices")){
+      List<Device> paireddevices = getPairedDevices();
+      result.success(paireddevices);
+    }
+    else {
       result.notImplemented();
     }
   }
@@ -148,6 +153,16 @@ public class UcareDevicePlugin implements MethodCallHandler {
   }
 
 
+  public List<Device> getPairedDevices(){
+    deviceManager = DeviceManager.getDeviceManager();
+    List<Device> devices = new ArrayList<>(deviceManager.getPairedDevices());
+    mDeviceSyncListener = new SyncProgressListener();
+    mLoggingDeviceSyncListener = new LoggingSyncProgressListener();
+    deviceManager.addConnectionStateListener(this);
+    deviceManager.addSyncListener(mDeviceSyncListener);
+    deviceManager.addLoggingSyncListener(mLoggingDeviceSyncListener);
+    return devices;
+  }
 
 
 
