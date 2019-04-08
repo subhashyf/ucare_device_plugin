@@ -40,6 +40,7 @@ import com.garmin.health.GarminHealth;
 import com.garmin.health.Device;
 import com.garmin.health.DeviceManager;
 import com.garmin.health.GarminDeviceScanCallback;
+import com.garmin.health.GarminHealthInitializationException;
 import com.garmin.health.ScannedDevice;
 
 
@@ -104,7 +105,6 @@ public class UcareDevicePlugin implements MethodCallHandler {
       if(!verifyPermissions())
       {
 
-
         this.activity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION, permission.WRITE_EXTERNAL_STORAGE }, REQUEST_COARSE_LOCATION);
 
       }
@@ -148,96 +148,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
   }
 
 
-  private void startScan()
-  {
 
-    final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-    // if Bluetooth is not enabled, request to enable Bluetooth
-    if (!bluetoothAdapter.isEnabled()) {
-      Intent enableBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-
-      this.activity.startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BT);
-    } else {
-      performScan();
-    }
-  }
-
-
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    // if bluetooth is enabled
-    if (requestCode == REQUEST_ENABLE_BT) {
-      if (resultCode == Activity.RESULT_OK) {
-        performScan();
-      } else {
-        Log.e("ScanningDialog", "Bluetooth has not been enabled. Application cannot proceed.");
-        Toast.makeText(this.activity, "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
-
-      }
-    }
-  }
-
-  private void performScan() {
-    final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    bluetoothScanner = bluetoothAdapter.getBluetoothLeScanner();
-    bluetoothScanner.flushPendingScanResults(callback);
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      ScanSettings.Builder settingsBuilder = new ScanSettings.Builder();
-      settingsBuilder.setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES);
-      ScanSettings settings = settingsBuilder.build();
-
-      List<ScanFilter> filterList = new ArrayList<>();
-
-      bluetoothScanner.startScan(filterList, settings, callback);
-    } else {
-      bluetoothScanner.startScan(callback);
-    }
-
-    List<ScannedDevice> externalPairedDevices = new ArrayList<>(0);
-
-    try
-    {
-      // Get device already paired with GCM.
-      externalPairedDevices = getDevices(DeviceManager.getDeviceManager());
-
-    }
-    catch(SecurityException e)
-    {
-      Log.e("BLE SCAN", "GCM Permissions not granted...");
-    }
-
-
-  }
-
-
-  public static List<ScannedDevice> getDevices(DeviceManager manager) throws SecurityException
-  {
-    return new ArrayList<>();
-  }
-
-  GarminDeviceScanCallback callback = new GarminDeviceScanCallback()
-  {
-    @Override
-    public void onBatchScannedDevices(List<ScannedDevice> devices) {
-
-    }
-
-    public void onScannedDevice(ScannedDevice device) {
-      for (Device mDevice : mDeviceManager.getPairedDevices()) {
-        if (mDevice.address().equalsIgnoreCase(device.address())) {
-          return;
-        }
-      }
-      mDevices.add(device);
-      //mDevices.addDevice(device);
-    }
-
-    public void onScanFailed(int errorCode) {
-      Toast.makeText(this.activity, "Scanning failed", Toast.LENGTH_SHORT).show();
-    }
-  };
 
 
 
