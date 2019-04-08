@@ -37,8 +37,8 @@ import android.content.res.Resources;
 
 
 import com.garmin.health.GarminHealth;
+import com.garmin.health.Device;
 import com.garmin.health.DeviceManager;
-import com.garmin.health.GarminHealthInitializationException;
 import com.garmin.health.GarminDeviceScanCallback;
 import com.garmin.health.ScannedDevice;
 
@@ -53,7 +53,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
   private Registrar registrar;
   private Activity activity;
   private static final int REQUEST_COARSE_LOCATION = 1;
-  private UserSettings mUserSettings;
+
   private BluetoothLeScanner bluetoothScanner;
   private DeviceManager mDeviceManager;
   private List<ScannedDevice> mDevices;
@@ -172,7 +172,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
         performScan();
       } else {
         Log.e("ScanningDialog", "Bluetooth has not been enabled. Application cannot proceed.");
-        Toast.makeText(getActivity().getApplicationContext(), "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.activity, "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
 
       }
     }
@@ -235,7 +235,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
     }
 
     public void onScanFailed(int errorCode) {
-      Toast.makeText(getActivity().getApplicationContext(), "Scanning failed", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this.activity, "Scanning failed", Toast.LENGTH_SHORT).show();
     }
   };
 
