@@ -28,6 +28,7 @@ import android.support.v4.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.List;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanSettings;
@@ -56,6 +57,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
   private static final int REQUEST_COARSE_LOCATION = 1;
 
   private DeviceManager deviceManager;
+  List<ScannedDevice> scannedDeviceList = null;
 
 
   private static final String LICENSE = "CgwCAwQFBgcICQoLDA4SgAIeCHUUoWcrOFjnJsFw14DCGjuUKcMXnpcyILioLWo1vxwYrwiwx+oSMJXM/bei8gWR8ND25zRHh8HYBPy3390fDsFcluiC1dVcR0LEuFGgxiuS6fK2R7+RmpUNxFZ72vyMS0PMH23IyVQOWoyAwIgdXd0npYwwGeCWMONYeZUMBbbh2HgPNqds1ZyaL7S1EQOubka00TnUVopSyVbwOeQTikRTPUwG1LlD7jJ0oPER7Mf1+v3fhaOaCS0Sl2UetQAuGscoRxqw8n6fJbD1SKi6nMcoLxYTu+q3SCXJ+Pf7F2Zq/4I97IaEa4Np5gzkTFjluUSqreegeuq6xONES1q1GIDwitWxLSoDAQID";
@@ -167,29 +169,29 @@ public class UcareDevicePlugin implements MethodCallHandler {
 
 
   private List<ScannedDevice>  scanForDevice() {
+
     BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
     BluetoothLeScanner scanner = btAdapter.getBluetoothLeScanner();
-    List<ScannedDevice> devices = null;
+
 
     scanner.startScan(new GarminDeviceScanCallback() {
+
       @Override
       public void onBatchScannedDevices(List<ScannedDevice> list) {
-
+        scannedDeviceList = list;
+        Log.d("Scanned Devices", scannedDeviceList.toString());
       }
 
       @Override
       public void onScannedDevice(ScannedDevice scannedDevice) {
-        devices.add(scannedDevice);
-      }
-
-      public void onScannedDevice(int callbackType, ScannedDevice device) {
-
+        scannedDeviceList.add(scannedDevice);
+        Log.d("Scanned Devices", scannedDeviceList.toString());
 
       }
 
     });
 
-    return devices;
+    return scannedDeviceList;
   }
 
 
