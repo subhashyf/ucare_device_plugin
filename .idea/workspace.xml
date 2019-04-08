@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="17e2c78d-5997-4a70-97be-9fa58ef72f3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ucare_device_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ucare_device_plugin.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +50,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -74,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="746">
-              <caret line="155" column="38" selection-start-line="155" selection-start-column="22" selection-end-line="155" selection-end-column="38" />
+            <state relative-caret-position="250">
+              <caret line="156" column="2" selection-start-line="156" selection-start-column="2" selection-end-line="156" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -100,6 +99,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>deviceManager</find>
+      <find>DeviceManager</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,12 +108,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" />
         <option value="$PROJECT_DIR$/lib/ucare_device_plugin.dart" />
+        <option value="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="10" />
     <option name="y" value="23" />
     <option name="width" value="1268" />
@@ -303,22 +303,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="746">
-          <caret line="155" column="38" selection-start-line="155" selection-start-column="22" selection-end-line="155" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="156" column="2" selection-start-line="156" selection-start-column="2" selection-end-line="156" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
