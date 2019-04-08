@@ -113,6 +113,11 @@ public class UcareDevicePlugin implements MethodCallHandler {
       List<Device> paireddevices = getPairedDevices();
       result.success(paireddevices);
     }
+
+    else if(call.method.equals("scanForDevice")){
+      List<ScannedDevice> scannedDevices = scanForDevice();
+      result.success(scannedDevices);
+    }
     else {
       result.notImplemented();
     }
