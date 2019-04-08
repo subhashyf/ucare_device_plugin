@@ -157,7 +157,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
     if (!bluetoothAdapter.isEnabled()) {
       Intent enableBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 
-      startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BT);
+      this.activity.startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BT);
     } else {
       performScan();
     }
@@ -200,17 +200,21 @@ public class UcareDevicePlugin implements MethodCallHandler {
     try
     {
       // Get device already paired with GCM.
-      externalPairedDevices = Util.getDevices(DeviceManager.getDeviceManager());
+      externalPairedDevices = getDevices(DeviceManager.getDeviceManager());
+
     }
     catch(SecurityException e)
     {
       Log.e("BLE SCAN", "GCM Permissions not granted...");
     }
 
-    for(ScannedDevice device : externalPairedDevices)
-    {
-      mDevices.add(device);
-    }
+
+  }
+
+
+  public static List<ScannedDevice> getDevices(DeviceManager manager) throws SecurityException
+  {
+    return new ArrayList<>();
   }
 
   GarminDeviceScanCallback callback = new GarminDeviceScanCallback()
