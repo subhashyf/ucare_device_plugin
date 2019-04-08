@@ -161,6 +161,25 @@ public class UcareDevicePlugin implements MethodCallHandler {
   }
 
 
+  private List<Device>  scanForDevice() {
+    BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothLeScanner scanner = btAdapter.getBluetoothScanner();
+    List<Device> devices = null;
+
+    scanner.startScan(new GarminDeviceScanCallback() {
+      public void onScannedDevice(int callbackType, ScannedDevice device) {
+        devices.add(device);
+
+      }
+
+      public void onScanFailed(int errorCode) {
+
+        showErrorDialog("Scanning failed");
+      }
+    });
+
+    return devices;
+  }
 
 
 }

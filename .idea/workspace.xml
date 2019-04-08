@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="17e2c78d-5997-4a70-97be-9fa58ef72f3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ucare_device_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ucare_device_plugin.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,25 +37,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="84" />
-          <entry key="java" value="123" />
+          <entry key="dart" value="93" />
+          <entry key="java" value="216" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="84" />
-          <entry key="JAVA" value="123" />
+          <entry key="Dart" value="93" />
+          <entry key="JAVA" value="216" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state relative-caret-position="300">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -73,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="157" column="43" selection-start-line="157" selection-start-column="43" selection-end-line="157" selection-end-column="43" />
+            <state relative-caret-position="40">
+              <caret line="163" column="37" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,13 +110,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/ucare_device_plugin.dart" />
         <option value="$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java" />
+        <option value="$PROJECT_DIR$/lib/ucare_device_plugin.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-54" />
+    <option name="x" value="53" />
     <option name="y" value="23" />
     <option name="width" value="1268" />
     <option name="height" value="708" />
@@ -136,12 +137,6 @@
               <item name="ucare_device_plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="ucare_device_plugin" type="462c0819:PsiDirectoryNode" />
               <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ucare_device_plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ucare_device_plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ucare_device_plugin" type="b2602c69:ProjectViewProjectNode" />
@@ -258,7 +253,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-54" y="23" width="1268" height="708" extended-state="0" />
+    <frame x="53" y="23" width="1268" height="708" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
@@ -304,22 +299,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state relative-caret-position="40">
+          <caret line="163" column="37" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="37" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/ucare/transasia/com/ucare_device_plugin/UcareDevicePlugin.java">
+    <entry file="file://$PROJECT_DIR$/lib/ucare_device_plugin.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="157" column="43" selection-start-line="157" selection-start-column="43" selection-end-line="157" selection-end-column="43" />
+        <state relative-caret-position="300">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>

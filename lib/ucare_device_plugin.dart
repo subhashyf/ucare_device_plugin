@@ -15,4 +15,9 @@ class UcareDevicePlugin {
     final List<dynamic> pairedDevices = await _channel.invokeMethod('getPairedDevices');
     return pairedDevices;
   }
+
+  static Future<dynamic> get scanForDevice async {
+    final List<dynamic> scannedDevices = await _channel.invokeMethod('scanForDevice');
+    return scannedDevices;
+  }
 }
