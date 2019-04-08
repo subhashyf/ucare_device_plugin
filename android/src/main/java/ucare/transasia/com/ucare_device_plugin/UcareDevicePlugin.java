@@ -179,13 +179,14 @@ public class UcareDevicePlugin implements MethodCallHandler {
       @Override
       public void onBatchScannedDevices(List<ScannedDevice> list) {
         scannedDeviceList = list;
-        Log.d("Scanned Devices", scannedDeviceList.toString());
+        Log.d("onBatchScannedDevices", scannedDeviceList.toString());
       }
 
       @Override
       public void onScannedDevice(ScannedDevice scannedDevice) {
+        Log.d("onScannedDevice", scannedDeviceList.toString());
         scannedDeviceList.add(scannedDevice);
-        Log.d("Scanned Devices", scannedDeviceList.toString());
+
 
       }
 
