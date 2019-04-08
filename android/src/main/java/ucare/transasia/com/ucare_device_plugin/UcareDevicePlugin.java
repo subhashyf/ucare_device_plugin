@@ -184,7 +184,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
 
       @Override
       public void onScannedDevice(ScannedDevice scannedDevice) {
-        Log.d("onScannedDevice", scannedDeviceList.toString());
+        Log.d("onScannedDevice", scannedDevice.toString());
         scannedDeviceList.add(scannedDevice);
 
 
