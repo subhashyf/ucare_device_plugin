@@ -36,15 +36,12 @@ import android.content.Intent;
 import android.view.View;
 import android.content.res.Resources;
 
-
 import com.garmin.health.GarminHealth;
 import com.garmin.health.Device;
 import com.garmin.health.DeviceManager;
 import com.garmin.health.GarminDeviceScanCallback;
 import com.garmin.health.GarminHealthInitializationException;
 import com.garmin.health.ScannedDevice;
-
-
 
 
 /** FlutterPlugin */
@@ -55,14 +52,20 @@ public class UcareDevicePlugin implements MethodCallHandler {
   private Registrar registrar;
   private Activity activity;
   private static final int REQUEST_COARSE_LOCATION = 1;
+  private final static int REQUEST_ENABLE_BT = 1;
 
   private DeviceManager deviceManager;
-  List<ScannedDevice> scannedDeviceList;
+
+  private List<ScannedDevice> scannedDeviceList;
+
+  private BluetoothAdapter mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+  private BluetoothLeScanner bluetoothScanner;
+  private BluetoothManager btManager;
+
 
 
   private static final String LICENSE = "CgwCAwQFBgcICQoLDA4SgAIeCHUUoWcrOFjnJsFw14DCGjuUKcMXnpcyILioLWo1vxwYrwiwx+oSMJXM/bei8gWR8ND25zRHh8HYBPy3390fDsFcluiC1dVcR0LEuFGgxiuS6fK2R7+RmpUNxFZ72vyMS0PMH23IyVQOWoyAwIgdXd0npYwwGeCWMONYeZUMBbbh2HgPNqds1ZyaL7S1EQOubka00TnUVopSyVbwOeQTikRTPUwG1LlD7jJ0oPER7Mf1+v3fhaOaCS0Sl2UetQAuGscoRxqw8n6fJbD1SKi6nMcoLxYTu+q3SCXJ+Pf7F2Zq/4I97IaEa4Np5gzkTFjluUSqreegeuq6xONES1q1GIDwitWxLSoDAQID";
   private boolean mPreferSystemBonding =  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-
 
 
   /** Plugin registration. */
@@ -72,10 +75,36 @@ public class UcareDevicePlugin implements MethodCallHandler {
   }
 
   private UcareDevicePlugin(Registrar registrar, MethodChannel channel){
-    this.registrar = registrar;
-    this.activity = registrar.activity();
-    this.channel = channel;
-    this.channel.setMethodCallHandler(this);
+
+      this.registrar = registrar;
+      this.activity = registrar.activity();
+      this.channel = channel;
+
+      //this.btManager = (BluetoothManager) this.activity.getSystemService(this.activity.getApplicationContext().BLUETOOTH_SERVICE);
+      this.channel.setMethodCallHandler(this);
+
+      try {
+        GarminHealth.initialize(this.activity.getApplicationContext(), mPreferSystemBonding, LICENSE);
+        this.deviceManager = DeviceManager.getDeviceManager();
+        checkBt();
+      }
+      catch (Exception e){
+        Log.e("DeviceManagerConstruct", "DeviceManager exception in constructor", e);
+      }
+
+  }
+
+  private void checkBt() {
+    try{
+      if (mBtAdapter == null || !mBtAdapter.isEnabled()) {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+      }
+    }
+    catch (Exception e){
+      Log.e("Consturctor error", "constructor erro", e);
+    }
+
   }
 
   @Override
@@ -88,24 +117,25 @@ public class UcareDevicePlugin implements MethodCallHandler {
         if(this == null){
           Log.e("NULL", "ERROR");
         }
-        GarminHealth.initialize(this.registrar.context(), mPreferSystemBonding, LICENSE);
-        Toast.makeText(this.activity, "Sucess", Toast.LENGTH_LONG).show();
+
+
+        Toast.makeText(activity, "Sucess", Toast.LENGTH_LONG).show();
         Log.i("Info", "information");
 
 
       }
-      catch (GarminHealthInitializationException e)
+      catch (Exception e)
       {
         // Handle the exception
         Log.e("Exception", "Exception", e);
-        Toast.makeText(this.activity, "Exception", Toast.LENGTH_LONG).show();
+        Toast.makeText(activity, "Exception", Toast.LENGTH_LONG).show();
 
       }
 
       if(!verifyPermissions())
       {
 
-        this.activity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION, permission.WRITE_EXTERNAL_STORAGE }, REQUEST_COARSE_LOCATION);
+        activity.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION, permission.WRITE_EXTERNAL_STORAGE }, REQUEST_COARSE_LOCATION);
 
       }
 
@@ -117,8 +147,12 @@ public class UcareDevicePlugin implements MethodCallHandler {
     }
 
     else if(call.method.equals("scanForDevice")){
-      List<ScannedDevice> scannedDevices = scanForDevice();
-      result.success(scannedDevices);
+      startScan();
+      result.success("Scanning Started");
+    }
+    else if(call.method.equals("stopScanForDevice")){
+      stopScan();
+      result.success("Scanning Stopped");
     }
     else {
       result.notImplemented();
@@ -136,8 +170,8 @@ public class UcareDevicePlugin implements MethodCallHandler {
     boolean buildCondition = Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
 
 
-    int locationPermission = ContextCompat.checkSelfPermission(this.activity.getApplicationContext(),Manifest.permission.ACCESS_COARSE_LOCATION);
-    int storagePermission = ContextCompat.checkSelfPermission(this.activity.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    int locationPermission = ContextCompat.checkSelfPermission(activity.getApplicationContext(),Manifest.permission.ACCESS_COARSE_LOCATION);
+    int storagePermission = ContextCompat.checkSelfPermission(activity.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     boolean permCondition = (locationPermission == PackageManager.PERMISSION_GRANTED) && (storagePermission == PackageManager.PERMISSION_GRANTED);
 
@@ -152,7 +186,7 @@ public class UcareDevicePlugin implements MethodCallHandler {
    */
   private boolean verifyLocationServices()
   {
-    LocationManager locationManager = (LocationManager)this.activity.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+    LocationManager locationManager = (LocationManager)activity.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 
     return locationManager != null && (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
   }
@@ -160,43 +194,92 @@ public class UcareDevicePlugin implements MethodCallHandler {
 
   public List<Device> getPairedDevices(){
     Log.i("getPairedDevices", "Inside getPairedDevices");
-    deviceManager = DeviceManager.getDeviceManager();
+
     List<Device> devices = new ArrayList<>(deviceManager.getPairedDevices());
     Log.i("getPairedDevices", "Inside after getPairedDevices");
 
     return devices;
   }
 
+  private void startScan()
+  {
+    try{
+      if (mBtAdapter == null || !mBtAdapter.isEnabled()) {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+      }
+      else {
+        scanForDevice();
+      }
+    }
+    catch (Exception e){
+      Log.e("Consturctor error", "constructor erro", e);
+    }
+  }
 
-  private List<ScannedDevice>  scanForDevice() {
+  private void stopScan()
+  {
+
+
+    if (bluetoothScanner != null) {
+      bluetoothScanner.stopScan(callback);
+    }
+
+  }
+
+  private void scanForDevice() {
 
     Log.i("scanForDevice", "scanForDevice");
 
-    BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-    BluetoothLeScanner scanner = btAdapter.getBluetoothLeScanner();
+    final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    bluetoothScanner = bluetoothAdapter.getBluetoothLeScanner();
 
-    scanner.startScan(new GarminDeviceScanCallback() {
+    if(mBtAdapter == null){
+      checkBt();
+    }
 
-      @Override
-      public void onBatchScannedDevices(List<ScannedDevice> results) {
-        //scannedDeviceList = list;
-        for (ScannedDevice result : results) {
-          Log.d("onBatchScannedDevices", results.toString());
-        }
-        
+    if(callback == null){
+      Log.d("NULL Callback", "callback is null");
+    }
+    else{
+      Log.d("CAllbakc object", callback.toString());
+      if(bluetoothScanner == null){
+        Log.d("NULL Scanner", "Scanner is null");
       }
-
-      @Override
-      public void onScannedDevice(ScannedDevice scannedDevice) {
-        Log.d("onScannedDevice", scannedDevice.toString());
-        //scannedDeviceList.add(scannedDevice);
-
+      else {
+        Log.d("Scanner object", bluetoothScanner.toString());
+        bluetoothScanner.flushPendingScanResults(callback);
+        bluetoothScanner.startScan(callback);
       }
+    }
 
-    });
-
-    return scannedDeviceList;
   }
+
+
+  GarminDeviceScanCallback callback = new GarminDeviceScanCallback()
+  {
+    @Override
+    public void onBatchScannedDevices(List<ScannedDevice> devices) {
+
+    }
+
+    public void onScannedDevice(ScannedDevice device) {
+
+      for (Device mDevice : deviceManager.getPairedDevices()) {
+        if (mDevice.address().equalsIgnoreCase(device.address())) {
+          return;
+        }
+      }
+      Log.d("Scanned Device", device.toString());
+      //scannedDeviceList.add(device);
+    }
+
+    public void onScanFailed(int errorCode) {
+      Toast.makeText(activity, "Scanning failed", Toast.LENGTH_SHORT).show();
+    }
+  };
+
+
 
 
 }
