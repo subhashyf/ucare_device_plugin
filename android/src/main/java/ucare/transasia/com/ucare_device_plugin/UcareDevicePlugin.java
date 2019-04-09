@@ -171,21 +171,25 @@ public class UcareDevicePlugin implements MethodCallHandler {
   private List<ScannedDevice>  scanForDevice() {
 
     Log.i("scanForDevice", "scanForDevice");
+
     BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
     BluetoothLeScanner scanner = btAdapter.getBluetoothLeScanner();
 
     scanner.startScan(new GarminDeviceScanCallback() {
-      
+
       @Override
-      public void onBatchScannedDevices(List<ScannedDevice> list) {
-        scannedDeviceList = list;
-        Log.d("onBatchScannedDevices", scannedDeviceList.toString());
+      public void onBatchScannedDevices(List<ScannedDevice> results) {
+        //scannedDeviceList = list;
+        for (ScannedDevice result : results) {
+          Log.d("onBatchScannedDevices", results.toString());
+        }
+        
       }
 
       @Override
       public void onScannedDevice(ScannedDevice scannedDevice) {
         Log.d("onScannedDevice", scannedDevice.toString());
-        scannedDeviceList.add(scannedDevice);
+        //scannedDeviceList.add(scannedDevice);
 
       }
 
